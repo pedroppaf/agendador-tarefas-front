@@ -1,0 +1,43 @@
+.register-component {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f5f5f5;
+}
+
+.register-component mat-card {
+    width: 400px;
+    padding: 20px;
+    box-shadow: none;
+    background-color: #f5f5f5;
+
+}
+
+.register-component .mat-mdc-text-field-wrapper {
+    border-radius: 25px;
+
+    .mdc-line-ripple {
+        display: none;
+    }
+}
+
+
+
+
+mat-form-field{
+    background-color: #e6e2e2;
+    margin-top: 15px;
+    border-radius: 20px;
+    border: 1px solid none;
+
+}
+#btn-primary{
+    margin-top: 10px;
+    border-radius: 20px;
+    box-shadow: 3px 3px 3px #c4c2c2 ;
+    cursor: pointer;
+    font-weight: 700;
+    color: rgb(24, 154, 206);
+    border: 1px solid none;
+}
