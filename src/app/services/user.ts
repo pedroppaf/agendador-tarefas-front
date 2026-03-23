@@ -1,0 +1,52 @@
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+
+interface UserRegisterPayload {
+  nome: string,
+  email: string,
+  senha: string,
+  enderecos?: [{
+    rua: string,
+    numero: number,
+    complemento: string,
+    cidade: string,
+    estado: string,
+    cep: string
+  }],
+  telefone?: [{
+    numero: string,
+    ddd: string
+  }]
+}
+
+interface UserRegisterResponse {
+  nome: string,
+  email: string,
+  enderecos: [{
+    rua: string,
+    numero: number,
+    complemento: string,
+    cidade: string,
+    estado: string,
+    cep: string
+  }] | null,
+  telefone?: [{
+    numero: string,
+    ddd: string
+  }] | null
+}
+
+@Injectable({
+  providedIn: 'root',
+})
+export class User {
+
+  private apiUrl = 'http://localhost:8083';
+
+  constructor(private http: HttpClient) { }
+
+  register(body: UserRegisterPayload): Observable<UserRegisterResponse> {
+    return this.http.post<UserRegisterResponse>(`${this.apiUrl}/usuario`, body)
+  }
+}
