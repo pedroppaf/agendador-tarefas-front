@@ -74,6 +74,11 @@ export class Login {
     .subscribe({
       next: (response) => {
         this.auth.saveToken(response)
+        this.user.getUserByEmail(response).subscribe({
+          next: (user) => {
+            this.auth.saveUser(user);
+          }
+        })
         this.router.navigate(['/tasks'])
       },
       error: (error) => {
