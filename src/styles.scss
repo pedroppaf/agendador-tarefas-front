@@ -1,4 +1,4 @@
-html, 
+html,
 body {
   height: 100%;
 }
@@ -8,7 +8,7 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
-main{
+main {
   min-height: 100vh;
 }
 
@@ -19,9 +19,25 @@ main{
 .padding-p {
   padding: 8px !important;
 }
+
 .padding-m {
   padding: 16px !important;
 }
+
 .padding-g {
   padding: 24px !important;
+}
+
+
+
+.btn-global {
+ 
+  margin-top: 10px !important;
+  border-radius: 20px !important;
+  box-shadow: 3px 3px 3px #c4c2c2 !important;
+  cursor: pointer !important;
+  font-weight: 700 !important;
+  background-color: rgb(9, 81, 235) !important;
+  color: white !important;
+  border: 1px solid none !important;
 }

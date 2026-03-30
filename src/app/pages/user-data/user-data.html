@@ -9,15 +9,37 @@
                 <input matInput formControlName="nome">
             </mat-form-field>
         </form>
-        <form>
+        <form [formGroup]="form">
             <mat-form-field class="full-width">
                 <mat-label>Email</mat-label>
                 <input matInput formControlName="email">
             </mat-form-field>
         </form>
 
+        <h3>Endereços</h3>
+        <button mat-flat-button class="btn-global" (click)="cadastrarEndereco()">Adicionar Endereço</button>
+
+        <h3>Telefones</h3>
+        <mat-list>
+            @for (telefone of user()?.telefones ?? []; track telefone.numero) {
+            <div class="item-wrapper">
+                <div class="item-text">
+                    <mat-list-item>{{telefone.ddd}} {{telefone.numero}}</mat-list-item>
+                </div>
+                <div class="item-action">
+                    <button matIconButton (click)="editarTelefone(telefone)">
+                        <mat-icon>edit</mat-icon>
+                    </button>
+                    <button matIconButton>
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </div>
+
+            </div>
+            }
+        </mat-list>
+        <button mat-raised-button class="btn-global" (click)="cadastrarTelefone()">Adicionar Telefone</button>
+
     </mat-card-content>
-    <mat-card-actions>
-        <button matButton>LIKE</button>
-    </mat-card-actions>
+
 </mat-card>
