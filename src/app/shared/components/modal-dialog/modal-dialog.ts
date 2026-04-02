@@ -3,20 +3,21 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angul
 import { MatButtonModule } from '@angular/material/button';
 import {
   MAT_DIALOG_DATA,
-  MatDialog,
   MatDialogActions,
-  MatDialogClose,
   MatDialogContent,
   MatDialogRef,
   MatDialogTitle,
 } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import {MatIconModule} from '@angular/material/icon';
 
 export interface DialogField {
   name: string;
   label: string;
-  value?: string;
+  value?: string | number;
+  button?: {icon: string, callback: (value: string, dialogRef: MatDialogRef<ModalDialog>) => void}
+  type?: string;
   validators?: any[];
 }
 
@@ -27,7 +28,7 @@ interface DialogData {
 
 @Component({
   selector: 'app-modal-dialog',
-  imports: [MatFormFieldModule, MatInputModule, FormsModule, MatButtonModule, MatDialogContent, MatDialogActions, MatDialogTitle, ReactiveFormsModule],
+  imports: [MatFormFieldModule, MatInputModule, FormsModule, MatButtonModule, MatDialogContent, MatDialogActions, MatDialogTitle, ReactiveFormsModule, MatIconModule],
   templateUrl: './modal-dialog.html',
   styleUrl: './modal-dialog.scss',
 })

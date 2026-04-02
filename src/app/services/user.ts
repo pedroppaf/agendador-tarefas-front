@@ -89,6 +89,48 @@ export class User {
     }
   }
 
+  getEnderecoByCep(cep: string): Observable<any>{
+    return this.http.get<any>(`${this.apiUrl}/usuario/endereco/${cep}`);
+  }
+
+  saveEndereco(body: {
+    rua: string,
+    numero: number,
+    complemento: string,
+    cidade: string,
+    estado: string,
+    cep: string
+  }, token: string): Observable<any> {
+    const headers = new HttpHeaders({ Authorization: `${token}` });
+
+    return this.http.post<UserResponse>(`${this.apiUrl}/usuario/endereco`, body, { headers }).pipe(
+      switchMap(() => this.getUserByEmail(token)),
+      tap(user => {
+        this.setUser(user)
+        this.auth.saveUser(user)
+      })
+    );
+  }
+
+  updateEndereco(id: number, body: {
+    rua: string,
+    numero: number,
+    complemento: string,
+    cidade: string,
+    estado: string,
+    cep: string
+  }, token: string): Observable<any> {
+    const headers = new HttpHeaders({ Authorization: `${token}` });
+
+    return this.http.put<UserResponse>(`${this.apiUrl}/usuario/endereco?id=${id}`, body, { headers }).pipe(
+      switchMap(() => this.getUserByEmail(token)),
+      tap(user => {
+        this.setUser(user)
+        this.auth.saveUser(user)
+      })
+    );
+  }
+
   saveTelefone(body: { numero: string, ddd: string }, token: string): Observable<any> {
     const headers = new HttpHeaders({ Authorization: `${token}` });
 
