@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import {
@@ -10,14 +10,18 @@ import {
 } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import {MatIconModule} from '@angular/material/icon';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatTimepickerModule } from '@angular/material/timepicker';
+import { provideNativeDateAdapter } from '@angular/material/core';
+
 
 export interface DialogField {
   name: string;
   label: string;
-  value?: string | number;
-  button?: {icon: string, callback: (value: string, dialogRef: MatDialogRef<ModalDialog>) => void}
-  type?: string;
+  value?: string | number | Date;
+  button?: { icon: string, callback: (value: string, dialogRef: MatDialogRef<ModalDialog>) => void }
+  type?: 'text' | 'number' | 'date' | 'time' | 'datetime';
   validators?: any[];
 }
 
@@ -28,9 +32,13 @@ interface DialogData {
 
 @Component({
   selector: 'app-modal-dialog',
-  imports: [MatFormFieldModule, MatInputModule, FormsModule, MatButtonModule, MatDialogContent, MatDialogActions, MatDialogTitle, ReactiveFormsModule, MatIconModule],
+  imports: [MatFormFieldModule, MatInputModule, FormsModule, MatButtonModule, MatDialogContent, MatDialogActions, MatDialogTitle, ReactiveFormsModule, MatIconModule, MatTimepickerModule, MatDatepickerModule],
   templateUrl: './modal-dialog.html',
   styleUrl: './modal-dialog.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [provideNativeDateAdapter()],
+
+
 })
 
 export class ModalDialog {
@@ -52,7 +60,7 @@ export class ModalDialog {
 
   form: FormGroup = this.formBuild.group(this.buildControls())
 
-  onSave(){
+  onSave() {
     this.dialogRef.close(this.form.value)
   }
 
